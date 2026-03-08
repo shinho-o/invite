@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>특별한 초대장</title>
+    <style>
+        body { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: 'Arial', sans-serif; background-color: #ffeef8; overflow: hidden; }
+        h1 { color: #ff477e; transition: 0.3s; }
+        .buttons { display: flex; gap: 20px; align-items: center; }
+        button { padding: 15px 25px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+        #yesBtn { background-color: #4CAF50; color: white; font-size: 20px; }
+        #noBtn { background-color: #f44336; color: white; font-size: 20px; }
+    </style>
+</head>
+<body>
+
+    <h1 id="question">나랑 같이 갈래? 💖</h1>
+    
+    <div class="buttons">
+        <button id="yesBtn" onclick="celebrate()">YES!</button>
+        <button id="noBtn" onclick="growYes()">NO...</button>
+    </div>
+
+    <script>
+        let scale = 1;
+        const messages = ["정말?", "진심이야?", "다시 생각해봐..", "왜 안돼? ㅠㅠ", "제발!!"];
+        
+        function growYes() {
+            // YES 버튼 크기 키우기
+            scale += 0.5;
+            document.getElementById('yesBtn').style.transform = `scale(${scale})`;
+            
+            // 질문 텍스트 바꾸기
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            document.getElementById('question').innerText = randomMsg;
+            
+            // NO 버튼은 조금씩 작게 (선택사항)
+            const noBtn = document.getElementById('noBtn');
+            let currentNoSize = parseFloat(window.getComputedStyle(noBtn).fontSize);
+            noBtn.style.fontSize = (currentNoSize * 0.9) + "px";
+        }
+
+        function celebrate() {
+            document.body.innerHTML = "<h1>야호! 갈 줄 알았어! 🎉</h1><p>일정은 나중에 알려줄게!</p>";
+            document.body.style.backgroundColor = "#fff9c4";
+        }
+    </script>
+</body>
+</html>
